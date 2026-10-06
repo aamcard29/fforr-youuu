@@ -1,0 +1,125 @@
+/* =========================
+   NO BUTTON ESCAPES
+========================= */
+
+function moveNoButton() {
+
+  const padding = 20;
+
+  const maxX =
+    window.innerWidth -
+    noBtn.offsetWidth -
+    padding;
+
+  const maxY =
+    window.innerHeight -
+    noBtn.offsetHeight -
+    padding;
+
+  const x =
+    Math.random() *
+    Math.max(maxX - padding, padding)
+    + padding;
+
+  const y =
+    Math.random() *
+    Math.max(maxY - padding, padding)
+    + padding;
+
+  noBtn.style.position = "fixed";
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  noBtn.style.zIndex = "9999";
+
+}
+
+
+/* الكمبيوتر */
+
+noBtn.addEventListener(
+  "mouseenter",
+  moveNoButton
+);
+
+
+/* الجوال */
+
+noBtn.addEventListener(
+  "touchstart",
+  function(e) {
+    e.preventDefault();
+    moveNoButton();
+  }
+);
+
+
+/* لو قدر يضغط عليه */
+
+noBtn.addEventListener(
+  "click",
+  function(e) {
+    e.preventDefault();
+    moveNoButton();
+  }
+);
+
+
+/* =========================
+   YES
+========================= */
+
+yesBtn.addEventListener("click", function(e) {
+
+  e.stopPropagation();
+
+  /* افتح الظرف */
+  envelope.classList.add("open");
+
+  /* بعد ما تطلع الورقة */
+  setTimeout(function() {
+
+    envelopeScene.style.display = "none";
+    buttons.style.display = "none";
+
+    finalLetter.style.display = "block";
+
+    /* Confetti */
+    confetti({
+      particleCount: 160,
+      spread: 100,
+      startVelocity: 35,
+      origin: {
+        y: 0.6
+      },
+
+      colors: [
+        "#ff4d6d",
+        "#c9184a",
+        "#ff758f",
+        "#ffffff"
+      ]
+    });
+
+    /* دفعة ثانية */
+    setTimeout(function() {
+
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: {
+          y: 0.5
+        }
+      });
+
+    }, 400);
+
+  }, 1200);
+
+});
+
+</script>
+
+</body>
+</html>
